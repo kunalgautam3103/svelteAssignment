@@ -7,6 +7,7 @@
     var explain = true;
     export let prevDis;
     export let nextDis;
+    let ops=["A","B","C","D"];
   
 
 </script>
@@ -130,7 +131,7 @@
     <div class="radioDiv">
     {#each JSON.parse(ques.content_text).answers as answers , index(answers)}
     <label class="label" for="answer{index}" id="label{index}"   class:cor={answers.is_correct==1} class:wro={$selectedAns.includes(answers.answer)&& answers.is_correct==0 && $selectedAns!=null}>
-    
+    <span>{ops[index]}. </span>
     <input type="radio" class="radio_input" name="answer" id="answer" value="{answers.answer}"  
     checked={answers.answer&&answers.is_correct==1?true : false}
     disabled

@@ -60,7 +60,7 @@ for (let i = 0; i < 11; i++) {
 		unattQues.push($question[i]);
 
 	}
-	console.log(unattQues);
+
 }
 $: unattempted.set(unattQues);
 </script>
