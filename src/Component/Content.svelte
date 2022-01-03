@@ -42,14 +42,12 @@
     } else {
       secString = second;
     }
-
     if (minute < 10) {
       minString = "0" + minute;
     } else {
       minString = minute;
     }
   }
-  $: console.log($selectedAns);
   setInterval(() => {
     timer();
   }, 1000);
@@ -69,7 +67,7 @@
   }
 </script>
 
-<section class="content_container display_flex_col">
+<section class="content_container display_flex_col position_rel">
   <div class="ques_cont">
     <div class="list" id="list">
       <List on:current on:closeList={closelist} />
@@ -103,6 +101,8 @@
     <h3 class="content_heading">{minString}:{secString}</h3>
     <Button type="button" caption="List" on:click={showlist} />
     <Button
+      id="prev_btn"
+      name="prev_btn"
       type="button"
       caption="Prev"
       disabled={prevDis}
@@ -112,22 +112,23 @@
     />
     <h3 class="content_heading">{currentQues + 1} of {11}</h3>
     <Button
+      id="next_btn"
+      name="next_btn"
       type="button"
       caption="Next"
       disabled={nextDis}
       on:click={() => {
-      dispatch("current", currentQues + 1);
+        dispatch("current", currentQues + 1);
       }}
     />
     <Button
+      id="next_btn"
+      name="next_btn"
       type="button"
       caption="EndTest"
       on:click={() => {
-      dispatch("endModel");
+        dispatch("endModel");
       }}
     />
   </div>
 </section>
-<style>
-
-</style>

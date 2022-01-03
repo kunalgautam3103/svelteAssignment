@@ -11,14 +11,14 @@
   let ops = ["A", "B", "C", "D"];
 </script>
 
-<section class="content_container display_flex_col">
+<section class="content_container display_flex_col position_rel">
   {#each $question as ques, i (ques)}
     {#if currentQues === i}
       <div class="content_div">
         <p class="para font_sz">
           {i + 1}. {JSON.parse(ques.content_text).question}
         </p>
-        <div class="radio_div font_sz display_flex_co">
+        <div class="radio_div font_sz display_flex_col">
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <label
               class="lab_rev font_sz"
@@ -42,7 +42,7 @@
                 disabled
               />
               <div
-                class="com_radio"
+                class="com_radio border_circle "
                 class:wrong_answer={$selectedAns.includes(answers.answer) &&
                   answers.is_correct == 0 &&
                   $selectedAns != null}
@@ -57,7 +57,8 @@
             {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
               <div class="explain ">
                 {#if answers.is_correct == 1}
-                  {ops[index]}. {@html JSON.stringify(
+                  <span class="font_sz">Option {ops[index]} is correct :</span>
+                  {@html JSON.stringify(
                     JSON.parse(ques.content_text).explanation
                   )
                     .replace('"', " ")
@@ -82,6 +83,8 @@
         />
         <h3>{i + 1} of {11}</h3>
         <Button
+          name="next_btn"
+          id="next_btn"
           type="button"
           caption="Next"
           disabled={nextDis}
@@ -90,6 +93,8 @@
           }}
         />
         <Button
+          name="result"
+          id="result"
           type="button"
           caption="Result"
           on:click={() => {
@@ -97,6 +102,8 @@
           }}
         />
         <Button
+          name="dash"
+          id="dash"
           type="button"
           caption="Dashboard "
           on:click={() => {
@@ -107,4 +114,3 @@
     {/if}
   {/each}
 </section>
-

@@ -117,7 +117,7 @@
 				{correct}
 			/>
 		{:else}
-			<div class="start_page">
+			<div class="start_page display_flex_row">
 				<Button
 					caption="Start Test"
 					type="button"
@@ -156,23 +156,3 @@
 		/>
 	{/if}
 </main>
-
-<style>
-	/* main {
-  text-align: center;
-  padding: 0;
-  max-width: 240px;
-  margin: 0;
-}
-.startpage {
-  height: 85vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 640px) {
-  
-} */
-</style>

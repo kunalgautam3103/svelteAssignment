@@ -59,13 +59,17 @@
     background-image: linear-gradient(to right, #eecda3, #ef629f);
     display: flex;
     width: 100vw;
+    position: fixed;
+    top: 0;
     box-shadow: rgb(250, 249, 249);
     align-items: center;
+    z-index: 10;
+    height: 10vh;
 }
 
 .image {
-    width: 6em;
-    height: 4em;
+    width: 6vw;
+    height: 6vh;
     margin-left: 20px;
 }
 
@@ -88,6 +92,12 @@
     }
 }
 
+@media (max-height: 400px) {
+    .header_heading_one {
+        font-size: 1.1rem;
+    }
+}
+
 main {
     text-align: center;
     padding: 0;
@@ -98,9 +108,6 @@ main {
 .start_page {
     height: 85vh;
     width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .content_container {
@@ -126,6 +133,7 @@ main {
     height: 75px;
     position: fixed;
     bottom: 0;
+    z-index: 20;
 }
 
 .para {
@@ -139,6 +147,7 @@ main {
 .content_heading {
     margin: 15px;
     font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .content_div {
@@ -157,31 +166,42 @@ main {
     .content_container {
         font-size: 0.8rem;
     }
+    .position_rel {
+        top: 10rem;
+    }
+}
+
+.position_rel {
+    top: 10vh;
+    position: relative;
 }
 
 .model_list {
     border: 5px solid rgb(247, 142, 142);
     background: rgb(255, 255, 255);
-    z-index: 100;
-    width: 40vw;
+    z-index: 10;
+    width: 30vw;
     height: 80vh;
     overflow: scroll;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: rgb(189, 225, 240);
 }
 
 .list_heading_div {
     display: flex;
     justify-content: space-around;
     background-image: linear-gradient(to right, #ff512f, #dd2476);
+    position: fixed;
+    width: 30vw;
+    z-index: 2;
 }
 
 .list_heading {
-    margin: 16px;
+    margin: 15px;
 }
 
 .inner_div {
     font-family: Georgia, "Times New Roman", Times, serif;
-    background: rgb(189, 225, 240);
     height: 2rem;
     white-space: nowrap;
     overflow: hidden;
@@ -189,7 +209,8 @@ main {
 }
 
 .list_content {
-    margin-top: 5px;
+    position: relative;
+    top: 6.9vh;
 }
 
 .list_heading:hover {
@@ -197,9 +218,39 @@ main {
     border: 2px solid;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1340px) {
     .list_heading_div {
         flex-direction: column;
+        height: 20vh;
+    }
+    .list_content {
+        top: 20vh;
+    }
+}
+
+@media (max-height: 1050px) {
+    .list_heading {
+        margin: 5px;
+    }
+}
+
+@media only screen and (min-width: 1340px) and (max-width: 1510px) {
+    .list_content {
+        position: relative;
+        top: 8vh;
+    }
+}
+
+@media only screen and (min-width: 1730px) and (max-width: 2490px) {
+    .list_content {
+        position: relative;
+        top: 5.5vh;
+    }
+}
+
+@media (max-width: 500px) {
+    .list_heading {
+        font-size: 0.8rem;
     }
 }
 
@@ -210,11 +261,15 @@ main {
     left: 30vw;
     height: 25vh;
     background-image: linear-gradient(to right, #eed2cc, #f39d7b);
-    z-index: 100;
+    z-index: 10;
     width: fit-content;
-    padding: 3rem 5rem;
+    padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     height: fit-content;
+}
+
+.end_content {
+    padding: 0 20px;
 }
 
 .lab_rev {
@@ -233,14 +288,18 @@ main {
     height: 0.8rem;
     background-color: #f5f5f0;
     border: 1px solid rgb(8, 8, 8);
-    border-radius: 50%;
     margin: auto 8px;
     box-sizing: border-box;
     padding: 2px;
 }
 
+.border_circle {
+    border-radius: 50%
+}
+
 .comm_radio {
     padding: 1px 6px;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .radio_check:after {
@@ -248,8 +307,8 @@ main {
     width: 100%;
     height: 100%;
     display: block;
-    background: green;
-    border-radius: 50%;
+    background: rgb(0, 128, 0);
+    border-radius: 60%;
     transform: scale(0);
 }
 

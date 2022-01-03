@@ -61,7 +61,7 @@
   $: unattempted.set(unattQues);
 </script>
 
-<div class="main_div display_flex_col">
+<div class="main_div display_flex_col position_rel">
   <div class="resultbox display_flex_row ">
     <div class="res">
       <h3>Result</h3>
@@ -103,7 +103,7 @@
           <td class="answer tab_data">
             {#each arr as arr, i (arr)}
               <span
-                class="com_radio comm_radio"
+                class="com_radio border_circle comm_radio"
                 class:correct={corArray[index] === i ? true : false}
                 class:select={corArray[index] != indexCur[index] &&
                 indexCur[index] == i
@@ -118,6 +118,8 @@
     </table>
   </div>
   <Button
+    name="dash_btn"
+    id="dash_btn"
     type="button"
     caption="Dashboard"
     on:click={() => {
@@ -125,5 +127,3 @@
     }}
   />
 </div>
-
-

@@ -39,13 +39,10 @@
     atmcount = $attempted.length;
     for (let i = 0; i < 11; i++) {
       if ($attempted.includes($question[i])) {
-        console.log($question[i]);
       } else {
         question.subscribe((item) => {
           unattQues = [...unattQues, item[i]];
           uatmcount = unattQues.length;
-
-          console.log(item[i], uatmcount);
         });
       }
     }
@@ -53,16 +50,14 @@
   $: if ($attempted.length == 11) {
     uatmcount = 0;
   }
- $:console.log($attempted)
 </script>
 
-<div class="model_list" transition:fly={{ x: -40 }} >
+<div class="model_list " transition:fly={{ x: -40 }}>
   <div class="list_heading_div">
     <h3 class="list_heading" on:click={showAll}>All Question: 11</h3>
     <h3 class="list_heading" on:click={showAttempted}>Attempted: {atmcount}</h3>
     <h3 class="list_heading" on:click={showUn}>Unattempted: {uatmcount}</h3>
   </div>
-
   <div class="list_content">
     {#if showA}
       {#each $question as ques, index (ques)}
@@ -78,7 +73,8 @@
       {:else}
         {#each $attempted as ques, index (ques)}
           <div class="inner_div" on:click={moveU(index, ques)}>
-            {index + 1}. {JSON.parse(ques.content_text).question}
+            {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
+              .question}
           </div>
           <hr />
         {/each}
@@ -90,7 +86,8 @@
       {:else}
         {#each unattQues as ques, index (ques)}
           <div class="inner_div" on:click={moveU(index, ques)}>
-            {index + 1}. {JSON.parse(ques.content_text).question}
+            {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
+              .question}
           </div>
           <hr />
         {/each}
@@ -98,4 +95,3 @@
     {/if}
   </div>
 </div>
-
