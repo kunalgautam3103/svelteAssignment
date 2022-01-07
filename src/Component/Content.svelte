@@ -9,6 +9,7 @@
   let second = 0;
   let minString;
   let secString;
+  let load;
   export let prevDis = false;
   export let nextDis = true;
   export let currentQues;
@@ -52,10 +53,12 @@
     timer();
   }, 1000);
   function showlist() {
+    load = 1;
     lis = document.getElementById("list");
     lis.style.display = "block";
   }
   function hidelist() {
+    load = 0;
     lis = document.getElementById("list");
     lis.style.display = "none";
   }
@@ -63,22 +66,25 @@
     currentQues = event.detail;
   }
   function closelist() {
+    load = 0;
     lis.style.display = "none";
   }
 </script>
 
-<section class="content_container display_flex_col position_rel">
-  <div class="ques_cont">
+<section class="content_container display_flex_col position_rel width_100">
+  <div class="ques_cont display_flex">
     <div class="list" id="list">
-      <List on:current on:closeList={closelist} />
+      <List on:current on:closeList={closelist} {load} />
     </div>
     {#each $question as ques, i (ques)}
       {#if currentQues === i}
         <div class="content_div" on:click={hidelist}>
-          <p class="para font_sz">
+          <p class="para font_sz font_fam position_relative">
             {i + 1}. {JSON.parse(ques.content_text).question}
           </p>
-          <div class="radio_div font_sz display_flex_co">
+          <div
+            class="radio_div font_sz font_fam display_flex_co position_relative"
+          >
             {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
               <label class="lab">
                 {opt[index]}.
@@ -97,7 +103,7 @@
       {/if}
     {/each}
   </div>
-  <div class="foot display_flex_row">
+  <div class="foot display_flex_row width_100 postion_fix">
     <h3 class="content_heading">{minString}:{secString}</h3>
     <Button type="button" caption="List" on:click={showlist} />
     <Button

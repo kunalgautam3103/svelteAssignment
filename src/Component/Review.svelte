@@ -8,20 +8,34 @@
   var explain = true;
   export let prevDis;
   export let nextDis;
+  let rel;
   let ops = ["A", "B", "C", "D"];
+
+  $: if (currentQues + 1) {
+    rel = JSON.parse($question[currentQues].content_text).explanation;
+    let start_ind = rel.indexOf("<seq");
+    while (start_ind > -1) {
+      let str1 = rel.substr(start_ind, 14);
+      let find = rel.charAt(start_ind + 9);
+      rel = rel.replace(str1, find);
+      start_ind = rel.indexOf("<seq");
+    }
+  }
 </script>
 
-<section class="content_container display_flex_col position_rel">
+<section class="content_container display_flex_col position_rel width_100">
   {#each $question as ques, i (ques)}
     {#if currentQues === i}
       <div class="content_div">
-        <p class="para font_sz">
+        <p class="para font_sz font_fam position_relative">
           {i + 1}. {JSON.parse(ques.content_text).question}
         </p>
-        <div class="radio_div font_sz display_flex_col">
+        <div
+          class="radio_div font_sz font_fam display_flex_col position_relative"
+        >
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <label
-              class="lab_rev font_sz"
+              class="lab_rev display_flex font_sz font_fam"
               for="answer{index}"
               id="label{index}"
               class:cor={answers.is_correct == 1}
@@ -42,7 +56,7 @@
                 disabled
               />
               <div
-                class="com_radio border_circle "
+                class="com_radio border_circle"
                 class:wrong_answer={$selectedAns.includes(answers.answer) &&
                   answers.is_correct == 0 &&
                   $selectedAns != null}
@@ -55,24 +69,16 @@
         <div class="exp">
           {#if explain}
             {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
-              <div class="explain ">
+              <div class="explain font_fam">
                 {#if answers.is_correct == 1}
-                  <span class="font_sz">Option {ops[index]} is correct :</span>
-                  {@html JSON.stringify(
-                    JSON.parse(ques.content_text).explanation
-                  )
-                    .replace('"', " ")
-                    .replace("Answer", answers.answer)
-                    .replace(/(?:\\[rn]|[\r\n]+)+/g, "")
-                    .replace(/Answer option.*/, "")
-                    .replace(/Answer.*/, "")}
+                  {@html rel}
                 {/if}
               </div>
             {/each}
           {/if}
         </div>
       </div>
-      <div class="foot display_flex_row">
+      <div class="foot display_flex_row width_100 postion_fix">
         <Button
           type="button"
           caption="Prev"

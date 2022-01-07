@@ -117,7 +117,7 @@
 				{correct}
 			/>
 		{:else}
-			<div class="start_page display_flex_row">
+			<div class="start_page display_flex_row width_100">
 				<Button
 					caption="Start Test"
 					type="button"

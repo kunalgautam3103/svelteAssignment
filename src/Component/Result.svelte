@@ -61,7 +61,7 @@
   $: unattempted.set(unattQues);
 </script>
 
-<div class="main_div display_flex_col position_rel">
+<div class="main_div display_flex_col position_rel width_100">
   <div class="resultbox display_flex_row ">
     <div class="res">
       <h3>Result</h3>
@@ -95,7 +95,7 @@
         <tr>
           <td class="tab_data">{index + 1}</td>
           <td
-            class="question tab_data para"
+            class="question tab_data trunc"
             on:click={() => {
               dispatch("rev", index);
             }}>{JSON.parse(ques.content_text).question}</td

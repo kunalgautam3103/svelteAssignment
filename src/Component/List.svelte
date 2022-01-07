@@ -2,15 +2,30 @@
   import { fly } from "svelte/transition";
   import { createEventDispatcher } from "svelte";
   import { question, attempted, selectedAns } from "../store";
+  import { onMount } from "svelte";
   import "../css/style.css";
   const dispatch = createEventDispatcher();
   let showA = true;
   let unattQues = [];
+  let attSeq = [];
   let showAtt = false;
   let showU = false;
   let atmcount = 0;
   let uatmcount = 0;
-  function showAll(event) {
+  let shw_all;
+  export let load;
+  let shw_att;
+  let shw_un;
+  $: if (load) {
+    selectAll();
+    showAll();
+  }
+  function selectAll() {
+    shw_all.style.background = "#f5c7da";
+    shw_att.style.background = null;
+    shw_un.style.background = null;
+  }
+  function showAll() {
     showAtt = false;
     showA = true;
     showU = false;
@@ -19,11 +34,17 @@
     showAtt = true;
     showA = false;
     showU = false;
+    shw_att.style.background = "#f5c7da";
+    shw_all.style.background = "";
+    shw_un.style.background = "";
   }
   function showUn() {
     showAtt = false;
     showA = false;
     showU = true;
+    shw_un.style.background = "#f5c7da";
+    shw_all.style.background = "";
+    shw_att.style.background = "";
   }
   function move(index, ques) {
     dispatch("current", index);
@@ -50,18 +71,50 @@
   $: if ($attempted.length == 11) {
     uatmcount = 0;
   }
+  $: if ($attempted.length > 0) {
+    attempted.subscribe((item) => {
+      for (let items of item) {
+        let i = $question.indexOf(items);
+        attSeq[i] = items;
+      }
+    });
+  }
 </script>
 
 <div class="model_list " transition:fly={{ x: -40 }}>
-  <div class="list_heading_div">
-    <h3 class="list_heading" on:click={showAll}>All Question: 11</h3>
-    <h3 class="list_heading" on:click={showAttempted}>Attempted: {atmcount}</h3>
-    <h3 class="list_heading" on:click={showUn}>Unattempted: {uatmcount}</h3>
+  <div class="list_heading_div postion_fix display_flex">
+    <h3
+      name="all"
+      id="all"
+      bind:this={shw_all}
+      class="list_heading"
+      on:click={showAll}
+    >
+      All Question: 11
+    </h3>
+    <h3
+      name="att"
+      id="att"
+      bind:this={shw_att}
+      class="list_heading"
+      on:click={showAttempted}
+    >
+      Attempted: {atmcount}
+    </h3>
+    <h3
+      name="unatt"
+      id="unatt"
+      bind:this={shw_un}
+      class="list_heading"
+      on:click={showUn}
+    >
+      Unattempted: {uatmcount}
+    </h3>
   </div>
-  <div class="list_content">
+  <div class="list_content position_relative">
     {#if showA}
       {#each $question as ques, index (ques)}
-        <div class="inner_div" on:click={move(index, ques)}>
+        <div class="inner_div wrap font_fam trunc" on:click={move(index, ques)}>
           {index + 1}. {JSON.parse(ques.content_text).question}
         </div>
         <hr />
@@ -71,12 +124,17 @@
       {#if $attempted.length == 0}
         <p>No Question Attempted</p>
       {:else}
-        {#each $attempted as ques, index (ques)}
-          <div class="inner_div" on:click={moveU(index, ques)}>
-            {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
-              .question}
-          </div>
-          <hr />
+        {#each attSeq as ques, index}
+          {#if ques != null}
+            <div
+              class="inner_div wrap font_fam trunc"
+              on:click={moveU(index, ques)}
+            >
+              {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
+                .question}
+            </div>
+            <hr />
+          {/if}
         {/each}
       {/if}
     {/if}
@@ -85,7 +143,10 @@
         <p>No Question to Show</p>
       {:else}
         {#each unattQues as ques, index (ques)}
-          <div class="inner_div" on:click={moveU(index, ques)}>
+          <div
+            class="inner_div wrap font_fam trunc"
+            on:click={moveU(index, ques)}
+          >
             {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
               .question}
           </div>

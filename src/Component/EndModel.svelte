@@ -16,11 +16,11 @@
   }
 </script>
 
-<div transition:fly={{ y: 300 }} class="modal_end">
+<div transition:fly={{ y: 300 }} class="modal_end wid_fit postion_fix">
   <div class="end_content">
-    <h2 class="font_sz">Do you Want to end Test ?</h2>
-    <h3 class="font_sz">Attempted: {attCount}</h3>
-    <h3 class="font_sz">UnAttempted: {unattCount}</h3>
+    <h2 class="font_sz font_fam">Do you Want to end Test ?</h2>
+    <h3 class="font_sz font_fam">Attempted: {attCount}</h3>
+    <h3 class="font_sz font_fam">UnAttempted: {unattCount}</h3>
   </div>
   <Button
     id="end_test"
