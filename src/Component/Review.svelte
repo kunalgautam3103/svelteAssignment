@@ -97,7 +97,7 @@
           name="dash"
           id="dash"
           type="button"
-          caption="Dashboard "
+          caption="Dashboard"
           on:click={() => {dispatch("moveToStart");}}
         />
       </div>
