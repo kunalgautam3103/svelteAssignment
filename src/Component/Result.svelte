@@ -19,7 +19,7 @@
       correctCount += 1;
     }
   }
-  $: uncorrectCount = 11 - correctCount;
+  $: uncorrectCount = $attempted.length - correctCount;
   $: for (let j = 0; j < 11; j++) {
     if ($selectedAns[j] != undefined) {
       atmcount += 1;
@@ -62,7 +62,7 @@
 </script>
 
 <div class="main_div display_flex_col position_rel width_100">
-  <div class="resultbox display_flex_row ">
+  <div class="resultbox display_flex_row">
     <div class="res">
       <h3>Result</h3>
       <h3>{result}&#37;</h3>
@@ -94,22 +94,18 @@
       {#each $question as ques, index (ques)}
         <tr>
           <td class="tab_data">{index + 1}</td>
-          <td
-            class="question tab_data trunc"
-            on:click={() => {
-              dispatch("rev", index);
-            }}>{JSON.parse(ques.content_text).question}</td
-          >
+          <td class="question tab_data trunc" on:click={()=>{dispatch("rev", index);}}>
+            {JSON.parse(ques.content_text).question}
+          </td>
           <td class="answer tab_data">
             {#each arr as arr, i (arr)}
               <span
                 class="com_radio border_circle comm_radio"
                 class:correct={corArray[index] === i ? true : false}
-                class:select={corArray[index] != indexCur[index] &&
-                indexCur[index] == i
-                  ? true
-                  : false}>{i + 1}</span
+                class:select={corArray[index] != indexCur[index] && indexCur[index] == i ? true : false}
               >
+                {i + 1}
+              </span>
             {/each}
           </td>
         </tr>
@@ -122,8 +118,6 @@
     id="dash_btn"
     type="button"
     caption="Dashboard"
-    on:click={() => {
-      dispatch("moveToStart");
-    }}
+    on:click={() => {dispatch("moveToStart");}}
   />
 </div>

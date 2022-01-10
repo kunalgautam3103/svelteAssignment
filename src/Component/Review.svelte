@@ -39,9 +39,7 @@
               for="answer{index}"
               id="label{index}"
               class:cor={answers.is_correct == 1}
-              class:wro={$selectedAns.includes(answers.answer) &&
-                answers.is_correct == 0 &&
-                $selectedAns != null}
+              class:wro={$selectedAns.includes(answers.answer) && answers.is_correct == 0 && $selectedAns != null}
             >
               <span>{ops[index]}. </span>
               <input
@@ -50,16 +48,12 @@
                 name="answer"
                 id="answer"
                 value={answers.answer}
-                checked={answers.answer && answers.is_correct == 1
-                  ? true
-                  : false}
+                checked={answers.answer && answers.is_correct == 1 ? true : false}
                 disabled
               />
               <div
                 class="com_radio border_circle"
-                class:wrong_answer={$selectedAns.includes(answers.answer) &&
-                  answers.is_correct == 0 &&
-                  $selectedAns != null}
+                class:wrong_answer={$selectedAns.includes(answers.answer) && answers.is_correct == 0 && $selectedAns != null}
                 class:radio_check={answers.is_correct == 1 || answers.answer}
               />
               {@html answers.answer}
@@ -67,15 +61,13 @@
           {/each}
         </div>
         <div class="exp">
-          {#if explain}
-            {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
-              <div class="explain font_fam">
-                {#if answers.is_correct == 1}
-                  {@html rel}
-                {/if}
-              </div>
-            {/each}
-          {/if}
+          {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
+            <div class="explain font_fam">
+              {#if answers.is_correct == 1}
+                {@html rel}
+              {/if}
+            </div>
+          {/each}
         </div>
       </div>
       <div class="foot display_flex_row width_100 postion_fix">
@@ -83,9 +75,7 @@
           type="button"
           caption="Prev"
           disabled={prevDis}
-          on:click={() => {
-            dispatch("current", i - 1);
-          }}
+          on:click={() => {dispatch("current", i - 1); }}
         />
         <h3>{i + 1} of {11}</h3>
         <Button
@@ -94,27 +84,21 @@
           type="button"
           caption="Next"
           disabled={nextDis}
-          on:click={() => {
-            dispatch("current", i + 1);
-          }}
+          on:click={() => {dispatch("current", i + 1); }}
         />
         <Button
           name="result"
           id="result"
           type="button"
           caption="Result"
-          on:click={() => {
-            dispatch("moveToResult");
-          }}
+          on:click={() => {dispatch("moveToResult");}}
         />
         <Button
           name="dash"
           id="dash"
           type="button"
           caption="Dashboard "
-          on:click={() => {
-            dispatch("moveToStart");
-          }}
+          on:click={() => {dispatch("moveToStart");}}
         />
       </div>
     {/if}

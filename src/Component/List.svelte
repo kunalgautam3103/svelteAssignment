@@ -83,31 +83,13 @@
 
 <div class="model_list " transition:fly={{ x: -40 }}>
   <div class="list_heading_div postion_fix display_flex">
-    <h3
-      name="all"
-      id="all"
-      bind:this={shw_all}
-      class="list_heading"
-      on:click={showAll}
-    >
+    <h3 name="all" id="all" bind:this={shw_all} class="list_heading" on:click={showAll}>
       All Question: 11
     </h3>
-    <h3
-      name="att"
-      id="att"
-      bind:this={shw_att}
-      class="list_heading"
-      on:click={showAttempted}
-    >
+    <h3 name="att" id="att" bind:this={shw_att} class="list_heading" on:click={showAttempted}>
       Attempted: {atmcount}
     </h3>
-    <h3
-      name="unatt"
-      id="unatt"
-      bind:this={shw_un}
-      class="list_heading"
-      on:click={showUn}
-    >
+    <h3 name="unatt" id="unatt" bind:this={shw_un} class="list_heading" on:click={showUn}>
       Unattempted: {uatmcount}
     </h3>
   </div>
@@ -126,12 +108,8 @@
       {:else}
         {#each attSeq as ques, index}
           {#if ques != null}
-            <div
-              class="inner_div wrap font_fam trunc"
-              on:click={moveU(index, ques)}
-            >
-              {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
-                .question}
+            <div class="inner_div wrap font_fam trunc" on:click={moveU(index, ques)}>
+              {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text).question}
             </div>
             <hr />
           {/if}
@@ -143,12 +121,8 @@
         <p>No Question to Show</p>
       {:else}
         {#each unattQues as ques, index (ques)}
-          <div
-            class="inner_div wrap font_fam trunc"
-            on:click={moveU(index, ques)}
-          >
-            {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text)
-              .question}
+          <div class="inner_div wrap font_fam trunc" on:click={moveU(index, ques)}>
+            {$question.indexOf(ques) + 1}. {JSON.parse(ques.content_text).question}
           </div>
           <hr />
         {/each}

@@ -82,19 +82,11 @@
           <p class="para font_sz font_fam position_relative">
             {i + 1}. {JSON.parse(ques.content_text).question}
           </p>
-          <div
-            class="radio_div font_sz font_fam display_flex_co position_relative"
-          >
+          <div class="radio_div font_sz font_fam display_flex_co position_relative">
             {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
               <label class="lab">
                 {opt[index]}.
-                <input
-                  type="radio"
-                  value={answers.answer}
-                  name="radio"
-                  id="radio{index}"
-                  bind:group={localOption[i]}
-                />
+                <input type="radio" value={answers.answer} name="radio" id="radio{index}" bind:group={localOption[i]}/>
                 {@html answers.answer}
               </label>
             {/each}
@@ -112,9 +104,7 @@
       type="button"
       caption="Prev"
       disabled={prevDis}
-      on:click={() => {
-        dispatch("current", currentQues - 1);
-      }}
+      on:click={() => {dispatch("current", currentQues - 1);}}
     />
     <h3 class="content_heading">{currentQues + 1} of {11}</h3>
     <Button
@@ -123,18 +113,14 @@
       type="button"
       caption="Next"
       disabled={nextDis}
-      on:click={() => {
-        dispatch("current", currentQues + 1);
-      }}
+      on:click={() => {dispatch("current", currentQues + 1);}}
     />
     <Button
       id="next_btn"
       name="next_btn"
       type="button"
       caption="EndTest"
-      on:click={() => {
-        dispatch("endModel");
-      }}
+      on:click={() => {dispatch("endModel");}}
     />
   </div>
 </section>

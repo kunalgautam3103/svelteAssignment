@@ -85,13 +85,11 @@
 	function movetoresult() {
 		startpage = true;
 		resultpage = true;
+		
 	}
 
 	function movetostart() {
-		startpage = true;
-		resultpage = false;
-		endModel = false;
-		currentQues = 0;
+		location.reload()
 	}
 
 	$: if (currentQues == 10) {

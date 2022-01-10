@@ -27,17 +27,13 @@
     name="end_test"
     type="button"
     caption="EndTest"
-    on:click={() => {
-      dispatch("resultpage");
-    }}
+    on:click={() => { dispatch("resultpage");}}
   />
   <Button
     id="cancel_btn"
     type="button"
     name="cancel_btn"
     caption="Cancel"
-    on:click={() => {
-      dispatch("closeEndmodel");
-    }}
+    on:click={() => {dispatch("closeEndmodel");}}
   />
 </div>

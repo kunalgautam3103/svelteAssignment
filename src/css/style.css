@@ -52,7 +52,6 @@
     cursor: pointer;
     border-radius: 4px;
     border: 1px solid #97e1f3;
-    padding: 0.5rem 0.5rem;
     padding: 10px;
     margin: 10px;
     text-align: center;
@@ -269,7 +268,7 @@ main {
 .modal_end {
     border: 5px solid #dd2476;
     top: 20vh;
-    left: 40vw;
+    left: 36vw;
     height: 25vh;
     background-image: linear-gradient(to right, #eed2cc, #f39d7b);
     z-index: 10;
@@ -327,12 +326,12 @@ main {
 
 .exp {
     margin-top: 2em;
+    margin-bottom: 18vh;
 }
 
 .explain {
     border: 1px solid rgb(135, 206, 235);
     background: rgb(135, 206, 235);
-    content: "";
     font-size: 20px;
     text-align: justify;
 }

@@ -11,7 +11,5 @@
 {#if href}
     <a {href}>{caption}</a>
 {:else}
-    <button class="btn font_fam wid_fit" {id} {name} {type} on:click {disabled}
-        >{caption}</button
-    >
+    <button class="btn font_fam wid_fit" {id} {name} {type} on:click {disabled}>{caption}</button>
 {/if}
