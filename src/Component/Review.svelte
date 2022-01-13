@@ -8,6 +8,7 @@
   var explain = true;
   export let prevDis;
   export let nextDis;
+  let unicode;
   let rel;
   let ops = ["A", "B", "C", "D"];
 
@@ -21,20 +22,38 @@
       start_ind = rel.indexOf("<seq");
     }
   }
+  function handleKeydown(e) {
+    unicode = e.keyCode;
+    if (unicode == 78) {
+      if (currentQues != 10) {
+        e.preventDefault();
+        dispatch("current", currentQues + 1);
+      }
+    } else if (unicode == 80) {
+      if (currentQues != 0) {
+        e.preventDefault();
+        dispatch("current", currentQues - 1);
+      }
+    } else if (unicode == 68) { e.preventDefault();
+      dispatch("moveToStart");
+    } else if (unicode == 82) {
+      e.preventDefault();
+      dispatch("moveToResult");
+    }
+  }
 </script>
 
 <section class="content_container display_flex_col position_rel width_100">
   {#each $question as ques, i (ques)}
     {#if currentQues === i}
       <div class="content_div">
-        <p class="para font_sz font_fam position_relative">
+        <p class="para font_sz font_fam position_relative" tabindex="0">
           {i + 1}. {JSON.parse(ques.content_text).question}
         </p>
-        <div
-          class="radio_div font_sz font_fam display_flex_col position_relative"
-        >
+        <div class="radio_div font_sz font_fam display_flex_col position_relative">
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <label
+              tabindex="0"
               class="lab_rev display_flex font_sz font_fam"
               for="answer{index}"
               id="label{index}"
@@ -48,11 +67,15 @@
                 name="answer"
                 id="answer"
                 value={answers.answer}
-                checked={answers.answer && answers.is_correct == 1 ? true : false}
+                checked={answers.answer && answers.is_correct == 1? true: false}
                 disabled
               />
               <div
+                aria-label={$selectedAns.includes(answers.answer) &&
+                answers.is_correct == 0 && $selectedAns != null? "answer is wrong": answers.is_correct == 1? "anwer is coorect": "unselected "}
+                id="inside_lab"
                 class="com_radio border_circle"
+                wrong={$selectedAns.includes(answers.answer) && answers.is_correct == 0 && $selectedAns != null}
                 class:wrong_answer={$selectedAns.includes(answers.answer) && answers.is_correct == 0 && $selectedAns != null}
                 class:radio_check={answers.is_correct == 1 || answers.answer}
               />
@@ -64,7 +87,7 @@
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <div class="explain font_fam">
               {#if answers.is_correct == 1}
-                {@html rel}
+                <span tabindex="0">{@html rel}</span>
               {/if}
             </div>
           {/each}
@@ -74,8 +97,9 @@
         <Button
           type="button"
           caption="Prev"
+          accesskey="p"
           disabled={prevDis}
-          on:click={() => {dispatch("current", i - 1); }}
+          on:click={() => { dispatch("current", i - 1); }}
         />
         <h3>{i + 1} of {11}</h3>
         <Button
@@ -83,24 +107,28 @@
           id="next_btn"
           type="button"
           caption="Next"
+          accesskey="n"
           disabled={nextDis}
-          on:click={() => {dispatch("current", i + 1); }}
+          on:click={() => { dispatch("current", i + 1); }}
         />
         <Button
           name="result"
           id="result"
           type="button"
+          accesskey="r"
           caption="Result"
-          on:click={() => {dispatch("moveToResult");}}
+          on:click={() => { dispatch("moveToResult"); }}
         />
         <Button
           name="dash"
           id="dash"
           type="button"
+          accesskey="d"
           caption="Dashboard"
-          on:click={() => {dispatch("moveToStart");}}
+          on:click={() => { dispatch("moveToStart"); }}
         />
       </div>
     {/if}
   {/each}
 </section>
+<svelte:window on:keydown={handleKeydown} />

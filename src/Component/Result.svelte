@@ -3,6 +3,7 @@
   import { createEventDispatcher } from "svelte";
   import Button from "../UI/Button.svelte";
   import "../css/style.css";
+import { prevent_default } from "svelte/internal";
   let dispatch = createEventDispatcher();
   let result = 0;
   let correctCount = 0;
@@ -59,27 +60,32 @@
     }
   }
   $: unattempted.set(unattQues);
+  const onKeyPress = (e,i )=> {
+    if (e.keyCode === 13) {
+      dispatch("rev", i);
+    }
+  };
 </script>
 
 <div class="main_div display_flex_col position_rel width_100">
   <div class="resultbox display_flex_row">
-    <div class="res">
+    <div class="res" tabindex="0">
       <h3>Result</h3>
       <h3>{result}&#37;</h3>
     </div>
-    <div class="res">
+    <div class="res" tabindex="0">
       <h3>Attempted</h3>
       <h3>{atmcount}</h3>
     </div>
-    <div class="res">
+    <div class="res" tabindex="0">
       <h3>UnAttempted</h3>
       <h3>{uatmcount}</h3>
     </div>
-    <div class="res">
+    <div class="res" tabindex="0">
       <h3>correct</h3>
       <h3>{correctCount}</h3>
     </div>
-    <div class="res">
+    <div class="res" tabindex="0">
       <h3>InCorrect</h3>
       <h3>{uncorrectCount}</h3>
     </div>
@@ -87,19 +93,22 @@
   <div class="qDiv">
     <table class="tab">
       <tr>
-        <th class="tab_data">Index</th>
-        <th class="tab_data">Question</th>
-        <th class="tab_data">Option</th>
+        <th class="tab_data" scope="col">Index</th>
+        <th class="tab_data" scope="col">Question</th>
+        <th class="tab_data" scope="col">Option</th>
       </tr>
       {#each $question as ques, index (ques)}
         <tr>
-          <td class="tab_data">{index + 1}</td>
-          <td class="question tab_data trunc" on:click={()=>{dispatch("rev", index);}}>
+          <td tabindex="0" class="tab_data">{index + 1}</td>
+          <td tabindex="0" class="question tab_data trunc" on:keypress={(e)=>onKeyPress(e,index)} on:click={()=>{dispatch("rev", index);}}>
             {JSON.parse(ques.content_text).question}
           </td>
           <td class="answer tab_data">
             {#each arr as arr, i (arr)}
               <span
+                tabindex="0"
+                role="textbox"
+                aria-label={(corArray[index] != indexCur[index] && indexCur[index] == i)? "answer is wrong" : ((corArray[index] === i)?"anwer is coorect":"unselected ")}
                 class="com_radio border_circle comm_radio"
                 class:correct={corArray[index] === i ? true : false}
                 class:select={corArray[index] != indexCur[index] && indexCur[index] == i ? true : false}

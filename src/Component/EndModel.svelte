@@ -18,16 +18,16 @@
 
 <div transition:fly={{ y: 300 }} class="modal_end wid_fit postion_fix">
   <div class="end_content">
-    <h2 class="font_sz font_fam">Do you Want to end Test ?</h2>
-    <h3 class="font_sz font_fam">Attempted: {attCount}</h3>
-    <h3 class="font_sz font_fam">UnAttempted: {unattCount}</h3>
+    <h2 class="font_bold font_sz font_fam">Do you Want to end Test ?</h2>
+    <h3 class="font_bold font_sz font_fam">Attempted: {attCount}</h3>
+    <h3 class="font_bold font_sz font_fam">UnAttempted: {unattCount}</h3>
   </div>
   <Button
     id="end_test"
     name="end_test"
     type="button"
     caption="EndTest"
-    on:click={() => { dispatch("resultpage");}}
+    on:click={() => {dispatch("resultpage");}}
   />
   <Button
     id="cancel_btn"

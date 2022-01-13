@@ -11,5 +11,5 @@
 {#if href}
     <a {href}>{caption}</a>
 {:else}
-    <button class="btn font_fam wid_fit" {id} {name} {type} on:click {disabled}>{caption}</button>
+    <button role="button" class="btn font_fam wid_fit" tabindex="0" {id} {name} {type} on:click {disabled} aria-label={caption}>{caption}</button>
 {/if}

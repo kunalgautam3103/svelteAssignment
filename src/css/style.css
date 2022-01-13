@@ -25,8 +25,12 @@
 }
 
 .font_sz {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.3rem;
+}
+
+.font_bold {
+    font-weight: 900;
 }
 
 .postion_fix {
@@ -59,7 +63,8 @@
 }
 
 .btn:focus {
-    outline: none
+    background: #aaaaaa;
+    color: rgb(255, 255, 255);
 }
 
 .btn:hover,
@@ -97,7 +102,7 @@
 }
 
 .header_heading_one {
-    left: 30vw;
+    left: 35vw;
 }
 
 @media (max-width: 640px) {
@@ -154,6 +159,7 @@ main {
 
 .para {
     margin-top: 15px;
+    margin-bottom: 7px;
     padding: 0;
     width: 100%;
     text-align: justify;
@@ -161,6 +167,7 @@ main {
 
 .question {
     max-width: 70vw;
+    text-align: left;
 }
 
 .content_heading {
@@ -296,7 +303,7 @@ main {
     height: 0.8rem;
     background-color: #f5f5f0;
     border: 1px solid rgb(8, 8, 8);
-    margin: auto 8px;
+    margin: 6px 8px;
     box-sizing: border-box;
     padding: 2px;
 }

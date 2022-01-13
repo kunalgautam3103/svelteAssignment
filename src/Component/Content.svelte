@@ -10,6 +10,7 @@
   let minString;
   let secString;
   let load;
+  let unicode;
   export let prevDis = false;
   export let nextDis = true;
   export let currentQues;
@@ -69,24 +70,48 @@
     load = 0;
     lis.style.display = "none";
   }
-</script>
 
+  function handleKeydown(e) {
+    console.log(e.keyCode);
+    unicode = e.keyCode;
+    if (unicode == 78) {
+      if (currentQues != 10) {
+        e.preventDefault();
+        dispatch("current", currentQues + 1);
+      }
+    } else if (unicode == 80) {
+      if (currentQues != 0) {
+        e.preventDefault();
+        dispatch("current", currentQues - 1);
+      }
+    } else if (unicode == 69) {
+      e.preventDefault();
+      dispatch("endModel");
+    } else if (unicode == 76) {
+      e.preventDefault();
+      showlist();
+    } else if (unicode == 27) {
+      e.preventDefault();
+      closelist();
+    }
+  }
+</script>
 <section class="content_container display_flex_col position_rel width_100">
   <div class="ques_cont display_flex">
     <div class="list" id="list">
-      <List on:current on:closeList={closelist} {load} />
+      <List on:current on:closeList={closelist} {load}/>
     </div>
     {#each $question as ques, i (ques)}
       {#if currentQues === i}
         <div class="content_div" on:click={hidelist}>
-          <p class="para font_sz font_fam position_relative">
-            {i + 1}. {JSON.parse(ques.content_text).question}
+          <p class="para font_sz font_fam position_relative" tabindex="0">
+            <span class="font_bold">{i + 1}. </span>{JSON.parse(ques.content_text).question}
           </p>
-          <div class="radio_div font_sz font_fam display_flex_co position_relative">
+          <div role="radiogroup" aria-labelledby="radio group" class="radio_div font_sz font_fam display_flex_co position_relative">
             {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
               <label class="lab">
                 {opt[index]}.
-                <input type="radio" value={answers.answer} name="radio" id="radio{index}" bind:group={localOption[i]}/>
+                <input type="radio" value={answers.answer} name="radio" id="radio{index}" bind:group={localOption[i]} role="radio" aria-checked="false" tabindex="0"/>
                 {@html answers.answer}
               </label>
             {/each}
@@ -101,6 +126,7 @@
     <Button
       id="prev_btn"
       name="prev_btn"
+      accesskey="l"
       type="button"
       caption="Prev"
       disabled={prevDis}
@@ -112,6 +138,7 @@
       name="next_btn"
       type="button"
       caption="Next"
+      accesskey="p"
       disabled={nextDis}
       on:click={() => {dispatch("current", currentQues + 1);}}
     />
@@ -119,8 +146,10 @@
       id="next_btn"
       name="next_btn"
       type="button"
+      accesskey="n"
       caption="EndTest"
       on:click={() => {dispatch("endModel");}}
     />
   </div>
 </section>
+<svelte:window on:keydown={handleKeydown} />
