@@ -67,7 +67,7 @@ import { prevent_default } from "svelte/internal";
   };
 </script>
 
-<div class="main_div display_flex_col position_relative width_98">
+<div class="main_div display_flex_col position_relative width_98 padding_0">
   <div class="resultbox display_flex_row">
     <div class="res" tabindex="0">
       <h3>Result</h3>

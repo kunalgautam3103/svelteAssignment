@@ -104,7 +104,7 @@
     {#each $question as ques, i (ques)}
       {#if currentQues === i}
         <div class="content_div" on:click={hidelist}>
-          <p class="para font_sz font_fam position_relative" tabindex="0">
+          <p class="para font_sz font_fam position_relative padding_0" tabindex="0">
             <span class="font_bold">{i + 1}. </span>{JSON.parse(ques.content_text).question}
           </p>
           <div role="radiogroup" aria-labelledby="radio group" class="radio_div font_sz font_fam display_flex_co position_relative">
@@ -120,7 +120,7 @@
       {/if}
     {/each}
   </div>
-  <div class="foot display_flex_row width_100 postion_fix">
+  <div class="foot display_flex_row width_100 postion_fix height_10">
     <h3 class="content_heading">{minString}:{secString}</h3>
     <Button type="button" caption="List" on:click={showlist} />
     <Button

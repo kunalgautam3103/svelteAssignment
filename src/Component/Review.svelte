@@ -47,10 +47,10 @@
   {#each $question as ques, i (ques)}
     {#if currentQues === i}
       <div class="content_div">
-        <p class="para font_sz font_fam position_relative" tabindex="0">
+        <p class="para font_sz font_fam position_relative padding_0" tabindex="0">
           {i + 1}. {JSON.parse(ques.content_text).question}
         </p>
-        <div class="radio_div font_sz font_fam display_flex_col position_relative height_normal">
+        <div class="radio_div font_sz font_fam display_flex_col position_relative height_fit">
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <label
               tabindex="0"
@@ -93,7 +93,7 @@
           {/each}
         </div>
       </div>
-      <div class="foot display_flex_row width_100 postion_fix">
+      <div class="foot display_flex_row width_100 postion_fix height_10">
         <Button
           type="button"
           caption="Prev"
