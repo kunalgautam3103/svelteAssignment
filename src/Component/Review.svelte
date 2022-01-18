@@ -43,14 +43,14 @@
   }
 </script>
 
-<section class="content_container display_flex_col position_rel width_100">
+<section class="content_container display_flex_col position_relative position_top width_100">
   {#each $question as ques, i (ques)}
     {#if currentQues === i}
       <div class="content_div">
         <p class="para font_sz font_fam position_relative" tabindex="0">
           {i + 1}. {JSON.parse(ques.content_text).question}
         </p>
-        <div class="radio_div font_sz font_fam display_flex_col position_relative">
+        <div class="radio_div font_sz font_fam display_flex_col position_relative height_normal">
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <label
               tabindex="0"
@@ -74,7 +74,7 @@
                 aria-label={$selectedAns.includes(answers.answer) &&
                 answers.is_correct == 0 && $selectedAns != null? "answer is wrong": answers.is_correct == 1? "anwer is coorect": "unselected "}
                 id="inside_lab"
-                class="com_radio border_circle"
+                class="com_radio border_circle com_radio_review"
                 wrong={$selectedAns.includes(answers.answer) && answers.is_correct == 0 && $selectedAns != null}
                 class:wrong_answer={$selectedAns.includes(answers.answer) && answers.is_correct == 0 && $selectedAns != null}
                 class:radio_check={answers.is_correct == 1 || answers.answer}
@@ -87,7 +87,7 @@
           {#each JSON.parse(ques.content_text).answers as answers, index (answers)}
             <div class="explain font_fam">
               {#if answers.is_correct == 1}
-                <span tabindex="0">{@html rel}</span>
+                <span class="exp_data" tabindex="0">{@html rel}</span>
               {/if}
             </div>
           {/each}

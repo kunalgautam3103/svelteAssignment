@@ -96,7 +96,7 @@
     }
   }
 </script>
-<section class="content_container display_flex_col position_rel width_100">
+<section class="content_container display_flex_col position_relative position_top width_100">
   <div class="ques_cont display_flex">
     <div class="list" id="list">
       <List on:current on:closeList={closelist} {load}/>

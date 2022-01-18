@@ -67,7 +67,7 @@ import { prevent_default } from "svelte/internal";
   };
 </script>
 
-<div class="main_div display_flex_col position_rel width_100">
+<div class="main_div display_flex_col position_relative width_98">
   <div class="resultbox display_flex_row">
     <div class="res" tabindex="0">
       <h3>Result</h3>
@@ -90,8 +90,8 @@ import { prevent_default } from "svelte/internal";
       <h3>{uncorrectCount}</h3>
     </div>
   </div>
-  <div class="qDiv">
-    <table class="tab">
+  <div>
+    <table class="tab wid_fit">
       <tr>
         <th class="tab_data" scope="col">Index</th>
         <th class="tab_data" scope="col">Question</th>
@@ -109,7 +109,7 @@ import { prevent_default } from "svelte/internal";
                 tabindex="0"
                 role="textbox"
                 aria-label={(corArray[index] != indexCur[index] && indexCur[index] == i)? "answer is wrong" : ((corArray[index] === i)?"anwer is coorect":"unselected ")}
-                class="com_radio border_circle comm_radio"
+                class="com_radio border_circle com_radio_result comm_radio" 
                 class:correct={corArray[index] === i ? true : false}
                 class:select={corArray[index] != indexCur[index] && indexCur[index] == i ? true : false}
               >

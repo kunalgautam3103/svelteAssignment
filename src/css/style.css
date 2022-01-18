@@ -49,6 +49,10 @@
     width: fit-content;
 }
 
+.wid_10 {
+    width: 100%;
+}
+
 .btn {
     background: #30aaaa;
     font-size: 1rem;
@@ -101,6 +105,10 @@
     margin-left: 20px;
 }
 
+.width_98 {
+    width: 98vw;
+}
+
 .header_heading_one {
     left: 35vw;
 }
@@ -141,7 +149,7 @@ main {
 
 .radio_div {
     align-items: flex-start;
-    text-align: justify;
+    text-align: start;
     left: 1rem;
     top: 1rem;
 }
@@ -152,7 +160,6 @@ main {
 
 .foot {
     background-image: linear-gradient(to right, #eecda3, #ef629f);
-    height: 75px;
     bottom: 0;
     z-index: 20;
 }
@@ -188,17 +195,13 @@ main {
     .content_container {
         font-size: 0.8rem;
     }
-    .position_rel {
-        top: 10rem;
-    }
     .modal_end {
         left: 25vw;
     }
 }
 
-.position_rel {
+.position_top {
     top: 10vh;
-    position: relative;
 }
 
 .model_list {
@@ -206,10 +209,11 @@ main {
     background: rgb(255, 255, 255);
     z-index: 10;
     width: 30vw;
-    height: 80vh;
+    height: 85vh;
     overflow: scroll;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     background: rgb(189, 225, 240);
+    border-top: 0;
 }
 
 .list_heading_div {
@@ -218,6 +222,8 @@ main {
     background-image: linear-gradient(to right, #ff512f, #dd2476);
     width: 30vw;
     z-index: 2;
+    border-top: 4px solid rgb(247, 142, 142);
+    ;
 }
 
 .list_heading {
@@ -235,6 +241,15 @@ main {
 .list_heading:hover {
     background-color: #f5c7da;
     border: 2px solid;
+}
+
+@media (max-height: 500px) {
+    .radio_div {
+        height: 60vh;
+    }
+    .height_normal {
+        height: fit-content;
+    }
 }
 
 @media (max-width: 1340px) {
@@ -370,14 +385,19 @@ main {
     height: 100%;
     align-items: center;
     gap: 2em;
-    margin: 25px auto;
+    top: 12vh;
+}
+
+.exp_data {
+    text-align: left;
+    word-break: break-all
 }
 
 .resultbox {
     background-image: linear-gradient(to right, #f0e0dd, #e6a3c1);
     border: 1px solid #ee87b5;
     width: 80vw;
-    height: 80px;
+    height: fit-content;
     border-radius: 5px;
     justify-content: space-around;
 }
@@ -389,13 +409,62 @@ main {
     }
 }
 
-.tab {
-    width: 90vw;
+@media (max-width: 400px) {
+    .list_heading {
+        font-size: 10px;
+    }
+    .content_heading {
+        margin: 2px;
+        font-size: 10px;
+    }
+    .btn {
+        margin: 3px;
+    }
+    .font_sz {
+        font-size: 0.8rem;
+    }
+    .list_heading_div {
+        height: 18vh;
+    }
+    .lab {
+        margin: 0;
+        margin-right: 3px;
+    }
+    .modal_end {
+        left: 13vw;
+    }
+    .explain {
+        font-size: 0.8rem;
+    }
+    .lab_rev {
+        padding: 0;
+        margin: 8px 0;
+    }
+    .com_radio_review {
+        margin: 0 5px;
+    }
+    .resultbox {
+        font-size: 0.4rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .answer {
+        padding: 0;
+    }
+    .com_radio_result {
+        margin: 6px 3px;
+    }
 }
 
 .tab_data {
     border: 1px solid rgb(243, 238, 238);
     background-color: rgb(194, 229, 243);
+}
+
+.tab {
+    border-collapse: collapse;
+    height: 20rem;
 }
 
 .answer {
